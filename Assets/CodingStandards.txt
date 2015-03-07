@@ -1,0 +1,53 @@
+AZIMUTH CODING STANDARDS
+
+All scripts are to be written in C#, NO EXCEPTIONS
+
+
+SPACING CONVENTIONS
+
+Tabs for indentation (Unity defaults to this, not my choice), Tabs have width 4
+
+Open braces on same line, with one space preceding
+
+Close braces are on their own line, with the exception of else and else if statements
+
+Functions have no space before the parentheses
+
+Commas always have a space immediately after
+
+Spaces in boolen statements and arithmetic are left to developer's best judgement, and should be used to visually group order of operations
+ex. a*b + c*d, not a * b+c * d
+
+
+VARIABLE CONVENTIONS
+
+Pure public variables are only to be used if the variable is intended to be modified in the inspector by non-programmers
+Use [HideInInspector] if a variable is meant to persist between sessions but not modified in the inspector
+Use [System.NonSerialized] if the public variable is not meant to be modified in the inspector and not mean to persist
+Use [Tooltip(String)] for all non-obvious inspector-exposed variables
+Set inspector to Debug to view private variable values
+
+
+NAMING CONVENTIONS
+
+Classes follow the Unity standard of PascalCase with no modifiers
+
+Member variables are camelCased, prefixed with a letter and an underscore to indicate intended nature of variable
+Key:
+c_varName		A component of the prefab this script is attached to. Use [RequireComponent (typeof (classname))]
+o_varName		A GameObject external to the one this script is attached to
+e_varName		A component of a GameObject external to the one this script is attached to
+g_varName		One of the "global" GameObjects stored in the scene, as dictated by the Scene section of this document
+varName			No prefix is used for primitive types, such as floats or strings
+varName			Variables exposed in the inspector have no prefix, regardless of other conditions
+
+Variables used in the scope of a single function are camelCased with no prefix
+
+Booleans should take the form of a true or false statement, such as isActive, as opposed to active
+
+Constants use ALL_CAPS_SNAKE_CASE
+
+Enums use PascalCase with camelCase fields. ex. SeasonEffect.inSummer
+
+Iterators use single letter names, using i, j, and k first, in that order
+
