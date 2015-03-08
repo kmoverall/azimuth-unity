@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(SphereCollider))]
 public class SeasonEmitter : MonoBehaviour {
     SphereCollider cEffectBounds;
+
+	public Season nodeSeason = Season.Summer;
 
 	// Use this for initialization
 	void Start () {
@@ -14,7 +17,6 @@ public class SeasonEmitter : MonoBehaviour {
 	void Update () {
 		Shader.SetGlobalVector("_NODE_POSITION", gameObject.transform.position);
 		Shader.SetGlobalFloat("_NODE_SIZE", cEffectBounds.radius);
-		Shader.SetGlobalInt("_GLOBAL_SEASON", 0);
-		Shader.SetGlobalInt("_NODE_SEASON", 1);
+		Shader.SetGlobalInt("_NODE_SEASON", (int)nodeSeason);
 	}
 }

@@ -22,9 +22,9 @@ ex. a*b + c*d, not a * b+c * d
 VARIABLE CONVENTIONS
 
 Pure public variables are only to be used if the variable is intended to be modified in the inspector by non-programmers
-Use [HideInInspector] if a variable is meant to persist between sessions but not modified in the inspector
+Use [System.HideInInspector] if a variable is meant to persist between sessions but not modified in the inspector
 Use [System.NonSerialized] if the public variable is not meant to be modified in the inspector and not mean to persist
-Use [Tooltip(String)] for all non-obvious inspector-exposed variables
+Use [System.Tooltip(String)] for all non-obvious inspector-exposed variables
 Set inspector to Debug to view private variable values
 
 
@@ -34,27 +34,29 @@ Classes follow the Unity standard of PascalCase with no modifiers
 
 Member variables are camelCased, prefixed with a letter to indicate intended nature of variable
 Key:
-cVarName		A component of the prefab this script is attached to. Use [RequireComponent (typeof (classname))]
+cVarName		A component of the prefab this script is attached to. Use [RequireComponent (typeof (classname))] on class
 oVarName		A GameObject external to the one this script is attached to
 eVarName		A component of a GameObject external to the one this script is attached to
-gVarName		One of the "global" GameObjects stored in the scene, as dictated by the Scene section of this document
-varName			No prefix is used for primitive types, such as floats or strings
+gVarName		One of the "global" GameObjects stored in the scene, as dictated by the Prefabs section of this document
+varName			No prefix is intrinsic properties of the script
 varName			Variables exposed in the inspector have no prefix, regardless of other conditions
+
+If access to a components member variables is needed, it is preferred to store a reference to the component, then access that variable through the component's methods
 
 Variables used in the scope of a single function are camelCased with no prefix
 
-Booleans should take the form of a true or false statement, such as isActive, as opposed to active
+Booleans should take the form of a true or false statement, such as isNodeActive, as opposed to nodeActive
 
 Constants use ALL_CAPS_SNAKE_CASE
 
-Enums use PascalCase with camelCase fields. ex. SeasonEffect.inSummer
+Enums use PascalCase with PascalCase fields. ex. SeasonEffect.InSummer
 
-Iterators use single letter names, using i, j, and k first, in that order
+Iterators use single letter names, using i, j, and k in that order as available
 
 
 PREFAB CONVENTIONS
 
-All scene-level global data and functions are to be contained in a SceneScript, stored on an empty gameobject located at the origin
+All scene-level global data and functions are to be contained in a script named after the current scene, stored on an empty gameobject located at the origin
 
 All data and functions that reoccur between scenes are to be contained in a GameMode script, stored on an empty gameobject located at the origin
 
