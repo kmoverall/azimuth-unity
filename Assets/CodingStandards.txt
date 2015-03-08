@@ -32,12 +32,12 @@ NAMING CONVENTIONS
 
 Classes follow the Unity standard of PascalCase with no modifiers
 
-Member variables are camelCased, prefixed with a letter and an underscore to indicate intended nature of variable
+Member variables are camelCased, prefixed with a letter to indicate intended nature of variable
 Key:
-c_varName		A component of the prefab this script is attached to. Use [RequireComponent (typeof (classname))]
-o_varName		A GameObject external to the one this script is attached to
-e_varName		A component of a GameObject external to the one this script is attached to
-g_varName		One of the "global" GameObjects stored in the scene, as dictated by the Scene section of this document
+cVarName		A component of the prefab this script is attached to. Use [RequireComponent (typeof (classname))]
+oVarName		A GameObject external to the one this script is attached to
+eVarName		A component of a GameObject external to the one this script is attached to
+gVarName		One of the "global" GameObjects stored in the scene, as dictated by the Scene section of this document
 varName			No prefix is used for primitive types, such as floats or strings
 varName			Variables exposed in the inspector have no prefix, regardless of other conditions
 
@@ -51,3 +51,11 @@ Enums use PascalCase with camelCase fields. ex. SeasonEffect.inSummer
 
 Iterators use single letter names, using i, j, and k first, in that order
 
+
+PREFAB CONVENTIONS
+
+All scene-level global data and functions are to be contained in a SceneScript, stored on an empty gameobject located at the origin
+
+All data and functions that reoccur between scenes are to be contained in a GameMode script, stored on an empty gameobject located at the origin
+
+Elements in the scene are to be organized using empty game objects

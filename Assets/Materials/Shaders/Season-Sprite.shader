@@ -1,11 +1,13 @@
-Shader "Sprites/Default"
+Shader "Sprites/SeasonalSprite"
 {
 	Properties
 	{
-		[PerRendererData] _SprTex ("Spring Sprite Texture", 2D) = "white" {}
-		[PerRendererData] _SumTex ("Summer Sprite Texture", 2D) = "white" {}
-		[PerRendererData] _AutTex ("Autumn Sprite Texture", 2D) = "white" {}
-		[PerRendererData] _WinTex ("Winter Sprite Texture", 2D) = "white" {}
+	//The spring texture is called MainTex for the use of the sprite renderer
+		[PerRendererData] _MainTex ("Main Sprite Texture", 2D) = "white" {}
+		_SprTex ("Spring Sprite Texture", 2D) = "white" {}
+		_SumTex ("Summer Sprite Texture", 2D) = "white" {}
+		_AutTex ("Autumn Sprite Texture", 2D) = "white" {}
+		_WinTex ("Winter Sprite Texture", 2D) = "white" {}
 		_Color ("Tint", Color) = (1,1,1,1)
 		[MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
 	}
@@ -66,21 +68,22 @@ Shader "Sprites/Default"
 				return OUT;
 			}
 
+			sampler2D _MainTex;
 			sampler2D _SprTex;
 			sampler2D _SumTex;
 			sampler2D _AutTex;
 			sampler2D _WinTex;
 
-			uniform float _NODE_SIZE = 0;
-			uniform float4 _NODE_POSITION = float4(0, 0, 0, 0);
-			uniform float _GLOBAL_SEASON = 0;
-			uniform float _NODE_SEASON = 1;
+			uniform float _NODE_SIZE;
+			uniform float3 _NODE_POSITION;
+			uniform int _GLOBAL_SEASON;
+			uniform int _NODE_SEASON;
 
 			fixed4 frag(v2f IN) : SV_Target
 			{
 				float dist = distance (IN.position_in_world_space, _NODE_POSITION);
 				fixed4 c;
-				float season;
+				int season;
 				
 				//Sets season based on distance from node
 				if (dist < _NODE_SIZE) {
