@@ -61,3 +61,9 @@ All scene-level global data and functions are to be contained in a script named 
 All data and functions that reoccur between scenes are to be contained in a GameMode script, stored on an empty gameobject located at the origin
 
 Elements in the scene are to be organized using empty game objects
+
+
+ASSET REQUIREMENTS
+
+All sprites that are "seasonal" require 5 sprite maps: A masking map, to be used as the main sprite texture, which paints out the bounds of the sprite,
+plus one sprite map for each season, with the actual sprites laid over.

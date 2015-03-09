@@ -6,6 +6,7 @@ public class SeasonEmitter : MonoBehaviour {
     SphereCollider cEffectBounds;
 
 	public Season nodeSeason = Season.Summer;
+	bool isActive = true;
 
 	// Use this for initialization
 	void Start () {
