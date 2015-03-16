@@ -2,7 +2,7 @@ Shader "Sprites/SeasonalSprite"
 {
 	Properties
 	{
-	//The spring texture is called MainTex for the use of the sprite renderer
+	//Main texture is used purely by the sprite renderer, and is not used by for actual renderering
 		[PerRendererData] _MainTex ("Main Sprite Texture", 2D) = "white" {}
 		_SprTex ("Spring Sprite Texture", 2D) = "white" {}
 		_SumTex ("Summer Sprite Texture", 2D) = "white" {}
@@ -78,6 +78,7 @@ Shader "Sprites/SeasonalSprite"
 			uniform float3 _NODE_POSITION;
 			uniform int _GLOBAL_SEASON;
 			uniform int _NODE_SEASON;
+			uniform int _NODE_ACTIVE;
 
 			fixed4 frag(v2f IN) : SV_Target
 			{
@@ -85,13 +86,12 @@ Shader "Sprites/SeasonalSprite"
 				fixed4 c;
 				int season;
 				
-				//Sets season based on distance from node
-				if (dist < _NODE_SIZE) {
+				//Sets season based on distance from node and whether the node is active
+				if (dist < _NODE_SIZE && _NODE_ACTIVE == 1) {
 					season = _NODE_SEASON;
 				} else {
 					season = _GLOBAL_SEASON;
 				}
-
 
 				//Sets c to appropriate texture
 				if (season == 0) {

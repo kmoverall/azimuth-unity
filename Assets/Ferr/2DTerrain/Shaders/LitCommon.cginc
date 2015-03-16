@@ -5,7 +5,7 @@ sampler2D _MainTex;
 half4     _MainTex_ST;
 
 #ifdef FERR2DT_LIGHTMAP
-sampler2D_half unity_Lightmap;
+// sampler2D_half unity_Lightmap;
 // half4          unity_LightmapST;
 #endif
 

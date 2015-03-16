@@ -3,6 +3,8 @@ AZIMUTH CODING STANDARDS
 All scripts are to be written in C#, NO EXCEPTIONS
 
 
+When in doubt, refer to http://devmag.org.za/2012/07/12/50-tips-for-working-with-unity-best-practices/
+
 SPACING CONVENTIONS
 
 Tabs for indentation (Unity defaults to this, not my choice), Tabs have width 4
@@ -37,11 +39,12 @@ Key:
 cVarName		A component of the prefab this script is attached to. Use [RequireComponent (typeof (classname))] on class
 oVarName		A GameObject external to the one this script is attached to
 eVarName		A component of a GameObject external to the one this script is attached to
-gVarName		One of the "global" GameObjects stored in the scene, as dictated by the Prefabs section of this document
+DEPRECATED:		gVarName		One of the "global" GameObjects stored in the scene, as dictated by the Prefabs section of this document
+								No longer in use, as all global gameobjects should be singletons using static functions to access data
 varName			No prefix is intrinsic properties of the script
 varName			Variables exposed in the inspector have no prefix, regardless of other conditions
 
-If access to a components member variables is needed, it is preferred to store a reference to the component, then access that variable through the component's methods
+If access to a component's member variables is needed, it is preferred to store a reference to the component, then access that variable through the component's methods
 
 Variables used in the scope of a single function are camelCased with no prefix
 
