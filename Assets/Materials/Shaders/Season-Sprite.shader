@@ -76,19 +76,42 @@ Shader "Sprites/SeasonalSprite"
 
 			uniform float _NODE_SIZE;
 			uniform float3 _NODE_POSITION;
+			uniform int _NODE_ACTIVE;
+
+			uniform float _NODE0_SIZE;
+			uniform float3 _NODE0_POSITION;
+			uniform int _NODE0_ACTIVE;
+
+			uniform float _NODE1_SIZE;
+			uniform float3 _NODE1_POSITION;
+			uniform int _NODE1_ACTIVE;
+
+			uniform float _NODE2_SIZE;
+			uniform float3 _NODE2_POSITION;
+			uniform int _NODE2_ACTIVE;
+
+			uniform float _NODE3_SIZE;
+			uniform float3 _NODE3_POSITION;
+			uniform int _NODE3_ACTIVE;
+
 			uniform int _GLOBAL_SEASON;
 			uniform int _NODE_SEASON;
-			uniform int _NODE_ACTIVE;
+			
 
 			fixed4 frag(v2f IN) : SV_Target
 			{
-				float dist = distance (IN.position_in_world_space, _NODE_POSITION);
+				
 				fixed4 c;
 				int season;
-				
+
 				//Sets season based on distance from node and whether the node is active
-				if (dist < _NODE_SIZE && _NODE_ACTIVE == 1) {
+				if (distance (IN.position_in_world_space, _NODE0_POSITION) < _NODE0_SIZE && _NODE0_ACTIVE == 1 ||
+					distance (IN.position_in_world_space, _NODE1_POSITION) < _NODE1_SIZE && _NODE1_ACTIVE == 1 ||
+					distance (IN.position_in_world_space, _NODE2_POSITION) < _NODE2_SIZE && _NODE2_ACTIVE == 1 ||
+					distance (IN.position_in_world_space, _NODE3_POSITION) < _NODE3_SIZE && _NODE3_ACTIVE == 1) {
+
 					season = _NODE_SEASON;
+
 				} else {
 					season = _GLOBAL_SEASON;
 				}

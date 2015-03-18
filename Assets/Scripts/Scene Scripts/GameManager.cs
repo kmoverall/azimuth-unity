@@ -44,11 +44,22 @@ public class GameManager : MonoBehaviour {
 	#endregion
 
 	List<SeasonEmitter> sceneNodes;
+	const int kMaxNodes = 4;
 	#region Node Functions
 
 	//SeasonEmitters register themselves in the sceneNodes list in their Start() function, so all nodes in the scene are tracked
-	public static void RegisterNode(SeasonEmitter node) {
-		instance.sceneNodes.Add(node);
+	//Returns the index of the node registered
+	public static int RegisterNode(SeasonEmitter node) {
+		if (instance.sceneNodes.Count < kMaxNodes) {
+			instance.sceneNodes.Add(node);
+			return instance.sceneNodes.Count - 1;
+		}
+		else {
+			//Cleans up nodes that are not being used by the scene
+			Debug.LogWarning("Too many nodes in scene! (Max = " + kMaxNodes + ")");
+			GameObject.Destroy(node.gameObject);
+			return -1;
+		}
 	}
 
 	//Finds node closest to a given transform
@@ -103,5 +114,11 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 		Shader.SetGlobalInt("_GLOBAL_SEASON", (int)instance.globalSeason);
 		Shader.SetGlobalInt("_NODE_SEASON", (int)instance.nodeSeason);
+
+		if (instance.sceneNodes.Count < GameManager.kMaxNodes) {
+			for (int i = instance.sceneNodes.Count; i < GameManager.kMaxNodes; i++ ) {
+				Shader.SetGlobalInt("_NODE" + i + "_ACTIVE", 0);
+			}
+		}
 	}
 }

@@ -2,6 +2,8 @@ using System;
 using UnityEngine;
 using UnityStandardAssets._2D;
 
+//Most of this is copied from a standard unity asset, and doesn't yet comply to Azimuth coding standards
+
 public class PlatformerCharacter2D : MonoBehaviour
 {
     [SerializeField] private float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
@@ -11,6 +13,10 @@ public class PlatformerCharacter2D : MonoBehaviour
     [SerializeField] private LayerMask m_WhatIsGround;                  // A mask determining what is ground to the character
 	[SerializeField] 
 	private bool isActive = true;
+
+	private SeasonEmitter eHeldNode = null;
+	[SerializeField]
+	private float nodePickupRange = 0.5f;
 
     private Transform m_GroundCheck;    // A position marking where to check if the player is grounded.
     const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
@@ -31,7 +37,9 @@ public class PlatformerCharacter2D : MonoBehaviour
     }
 
 	private void Start() {
-		InputManager.RegisterPlayer(this);
+		if (isActive) {
+			InputManager.RegisterPlayer(this);
+		}
 	}
 
 
@@ -104,6 +112,32 @@ public class PlatformerCharacter2D : MonoBehaviour
         }
     }
 
+
+	public void PickUpNode() {
+		SeasonEmitter nodeToPickUp = GameManager.GetNearestNode(gameObject.transform.position);
+
+		//If the node is within pickup range, parent it to the player character and disable it
+		if (Vector3.Distance(nodeToPickUp.transform.position, gameObject.transform.position) < nodePickupRange) {
+			nodeToPickUp.gameObject.transform.parent = gameObject.transform;
+			nodeToPickUp.Deactivate();
+			eHeldNode = nodeToPickUp;
+		}
+	}
+
+	public void DropNode() {
+		//Only drop a node if you have one in the first place
+		if (eHeldNode != null) {
+			eHeldNode.transform.parent = null;
+			eHeldNode.Activate();
+			eHeldNode = null;
+		}
+	}
+
+	public bool IsHoldingNode {
+		get {
+			return eHeldNode != null;
+		}
+	}
 
     private void Flip()
     {

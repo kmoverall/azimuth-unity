@@ -39,6 +39,7 @@ Key:
 cVarName		A component of the prefab this script is attached to. Use [RequireComponent (typeof (classname))] on class
 oVarName		A GameObject external to the one this script is attached to
 eVarName		A component of a GameObject external to the one this script is attached to
+kVarName		A constant value
 DEPRECATED:		gVarName		One of the "global" GameObjects stored in the scene, as dictated by the Prefabs section of this document
 								No longer in use, as all global gameobjects should be singletons using static functions to access data
 varName			No prefix is intrinsic properties of the script
@@ -49,8 +50,6 @@ If access to a component's member variables is needed, it is preferred to store 
 Variables used in the scope of a single function are camelCased with no prefix
 
 Booleans should take the form of a true or false statement, such as isNodeActive, as opposed to nodeActive
-
-Constants use ALL_CAPS_SNAKE_CASE
 
 Enums use PascalCase with PascalCase fields. ex. SeasonEffect.InSummer
 
