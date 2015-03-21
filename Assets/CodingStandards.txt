@@ -34,6 +34,12 @@ NAMING CONVENTIONS
 
 Classes follow the Unity standard of PascalCase with no modifiers
 
+Interfaces are prefixed with a capital I followed by an underscore. ex. I_InterfaceName
+
+Functions follow the Unity standard of PascalCase with no modifiers
+
+Functions that behave as event resoibse are to begin with On, followed by a description of the event that trigger them
+
 Member variables are camelCased, prefixed with a letter to indicate intended nature of variable
 Key:
 cVarName		A component of the prefab this script is attached to. Use [RequireComponent (typeof (classname))] on class

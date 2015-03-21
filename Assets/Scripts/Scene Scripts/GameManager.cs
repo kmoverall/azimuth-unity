@@ -97,6 +97,7 @@ public class GameManager : MonoBehaviour {
 
 		return instance.globalSeason;
 	}
+
 	#endregion
 
 	GameState currentGameState = GameState.Playing;
@@ -115,6 +116,7 @@ public class GameManager : MonoBehaviour {
 		Shader.SetGlobalInt("_GLOBAL_SEASON", (int)instance.globalSeason);
 		Shader.SetGlobalInt("_NODE_SEASON", (int)instance.nodeSeason);
 
+		//If node shader variables with no corresponding node are not cleared out, they will persist between scenes
 		if (instance.sceneNodes.Count < GameManager.kMaxNodes) {
 			for (int i = instance.sceneNodes.Count; i < GameManager.kMaxNodes; i++ ) {
 				Shader.SetGlobalInt("_NODE" + i + "_ACTIVE", 0);

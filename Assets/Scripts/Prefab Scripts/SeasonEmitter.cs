@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(SphereCollider))]
+[RequireComponent(typeof(CircleCollider2D))]
 public class SeasonEmitter : MonoBehaviour {
-    SphereCollider cEffectBounds;
+    CircleCollider2D cEffectBounds;
 
 	//TODO: Create a custom inspector for season emitters
 
 	[HideInInspector] bool isActive = true;
+	public bool IsActive { get {return isActive; } }
 	[HideInInspector] public float radius;
 	int nodeIndex;
 
@@ -21,7 +22,7 @@ public class SeasonEmitter : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        cEffectBounds = gameObject.GetComponent<SphereCollider>();
+		cEffectBounds = gameObject.GetComponent<CircleCollider2D>();
 		cEffectBounds.isTrigger = true;
 		radius = cEffectBounds.radius;
 
@@ -37,6 +38,5 @@ public class SeasonEmitter : MonoBehaviour {
 		} else {
 			Shader.SetGlobalInt("_NODE" + nodeIndex + "_ACTIVE", 0);
 		}
-		
 	}
 }
