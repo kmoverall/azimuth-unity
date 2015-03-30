@@ -19,11 +19,37 @@ public class SimpleCharacterInput : RaycastCharacterInput
 
 	private int movingDirection;
 
+	private SeasonEmitter eHeldNode = null;
+	[SerializeField]
+	private float nodePickupRange = 0.5f;
+
+	void Awake() {
+		//InputManager.RegisterPlayerInput(this);
+	}
+
 	void Update ()
 	{
 		
-		if (Input.GetKey(KeyCode.R)) {
+		/*if (Input.GetKey(KeyCode.R)) {
 			Application.LoadLevel(0);
+		}*/
+
+		if (Input.GetKeyDown(KeyCode.E)) {
+			if (eHeldNode == null) {
+				SeasonEmitter nodeToPickUp = GameManager.GetNearestNode(gameObject.transform.position);
+
+				//If the node is within pickup range, parent it to the player character and disable it
+				if (Vector3.Distance(nodeToPickUp.transform.position, gameObject.transform.position) < nodePickupRange) {
+					nodeToPickUp.gameObject.transform.parent = gameObject.transform;
+					nodeToPickUp.Deactivate();
+					eHeldNode = nodeToPickUp;
+				}
+			}
+			else {
+				eHeldNode.transform.parent = null;
+				eHeldNode.Activate();
+				eHeldNode = null;
+			}
 		}
 		
 		jumpButtonHeld = false;
