@@ -34,6 +34,8 @@ NAMING CONVENTIONS
 
 Classes follow the Unity standard of PascalCase with no modifiers
 
+Objects inheriting from SeasonalObject are prefixed with S_. ex. S_TallPlant
+
 Interfaces are prefixed with a capital I followed by an underscore. ex. I_InterfaceName
 
 Functions follow the Unity standard of PascalCase with no modifiers

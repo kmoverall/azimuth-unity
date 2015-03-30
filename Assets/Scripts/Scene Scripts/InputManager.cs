@@ -40,7 +40,7 @@ public class InputManager : MonoBehaviour {
 					instance.jumpPressed = CrossPlatformInputManager.GetButtonDown("Jump");
 				}
 
-				if (Input.GetKeyDown(KeyCode.LeftShift)) {
+				if (Input.GetKeyDown(KeyCode.E)) {
 					if (instance.player.IsHoldingNode) {
 						instance.player.DropNode();
 					}
