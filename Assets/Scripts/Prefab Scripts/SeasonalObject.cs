@@ -10,5 +10,14 @@ public abstract class SeasonalObject : MonoBehaviour {
 		currentSeason = GameManager.GlobalSeason;
 	}
 
-	public abstract void Transition(Season toSeason);
+	//Boilerplate to make sure that the object-specific transitions only happen when needed
+	//Also helps remember to actually set the current season
+	public void Transition(Season toSeason) {
+		if (currentSeason != toSeason) {
+			DoTransition(toSeason);
+			currentSeason = toSeason;
+		}
+	}
+
+	protected abstract void DoTransition(Season toSeason);
 }

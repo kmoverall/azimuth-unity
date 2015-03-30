@@ -1,17 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(CircleCollider2D))]
 public class SeasonEmitter : MonoBehaviour {
-
-	//TODO: cEffectBounds needs to be phased out once the custom editor is put in place. It doesn't really do anything
-    CircleCollider2D cEffectBounds;
 	Collider2D[] eEffectedSeasonalObjects = new Collider2D[30];
+	int numEffectedSeasonalObjects = 0;
 
 	//TODO: Create a custom inspector for season emitters
 	[HideInInspector] bool isActive = true;
 	public bool IsActive { get {return isActive; } }
-	[HideInInspector] public float radius;
+	public float radius;
 	const float kMaxDepth = -1;
 	const float kMinDepth = 1;
 
@@ -20,39 +17,33 @@ public class SeasonEmitter : MonoBehaviour {
 
 	public void Activate() {
 		isActive = true;
-		cEffectBounds.enabled = true;
 
-		foreach (Collider2D o in eEffectedSeasonalObjects) {
-			if (o != null && o.gameObject.GetComponent<SeasonalObject>() != null) {
-				o.gameObject.GetComponent<SeasonalObject>().Transition(GameManager.NodeSeason);
+		for (int i = 0; i < numEffectedSeasonalObjects; i++) {
+			if (eEffectedSeasonalObjects[i].gameObject.GetComponent<SeasonalObject>() != null) {
+				eEffectedSeasonalObjects[i].gameObject.GetComponent<SeasonalObject>().Transition(GameManager.NodeSeason);
 			}
 		}
 	}
 
 	public void Deactivate() {
 		isActive = false;
-		cEffectBounds.enabled = false;
 
-		foreach (Collider2D o in eEffectedSeasonalObjects) {
-			if (o != null && o.gameObject.GetComponent<SeasonalObject>() != null) {
-				o.gameObject.GetComponent<SeasonalObject>().Transition(GameManager.GlobalSeason);
+		for (int i = 0; i < numEffectedSeasonalObjects; i++) {
+			if (eEffectedSeasonalObjects[i].gameObject.GetComponent<SeasonalObject>() != null) {
+				eEffectedSeasonalObjects[i].gameObject.GetComponent<SeasonalObject>().Transition(GameManager.GlobalSeason);
 			}
 		}
 	}
 
 	// Use this for initialization
 	void Start () {
-		cEffectBounds = gameObject.GetComponent<CircleCollider2D>();
-		cEffectBounds.isTrigger = true;
-		radius = cEffectBounds.radius;
-
 		nodeIndex = GameManager.RegisterNode(this);
     }
 	
 	// Update is called once per frame
 	void Update () {
 		Shader.SetGlobalVector("_NODE" + nodeIndex + "_POSITION", gameObject.transform.position);
-		Shader.SetGlobalFloat("_NODE" + nodeIndex + "_SIZE", cEffectBounds.radius);
+		Shader.SetGlobalFloat("_NODE" + nodeIndex + "_SIZE", radius);
 		if (isActive) {
 			Shader.SetGlobalInt("_NODE" + nodeIndex + "_ACTIVE", 1);
 		} else {
@@ -61,16 +52,20 @@ public class SeasonEmitter : MonoBehaviour {
 
 		//Tells seaonsal objects to transition if needed
 
-		if (Physics2D.OverlapCircleNonAlloc(transform.position, radius, eEffectedSeasonalObjects) == eEffectedSeasonalObjects.Length) {
+		numEffectedSeasonalObjects = Physics2D.OverlapCircleNonAlloc(transform.position, radius, eEffectedSeasonalObjects);
+
+		if (numEffectedSeasonalObjects == eEffectedSeasonalObjects.Length) {
 			Debug.LogWarning("Node intersecting maximum number of objects (" + eEffectedSeasonalObjects.Length + ")!");
 		}
 
-		if (isActive) {
-			foreach (Collider2D o in eEffectedSeasonalObjects) {
-				if (o != null && o.gameObject.GetComponent<SeasonalObject>() != null) {
-					o.gameObject.GetComponent<SeasonalObject>().Transition(GameManager.NodeSeason);
-				}
+		for (int i = 0; i < numEffectedSeasonalObjects; i++) {
+			if (eEffectedSeasonalObjects[i].gameObject.GetComponent<SeasonalObject>() != null && isActive) {
+					eEffectedSeasonalObjects[i].gameObject.GetComponent<SeasonalObject>().Transition(GameManager.NodeSeason);
 			}
 		}
+	}
+
+	void OnDrawGizmos() {
+		Gizmos.DrawWireSphere(transform.position, radius);
 	}
 }

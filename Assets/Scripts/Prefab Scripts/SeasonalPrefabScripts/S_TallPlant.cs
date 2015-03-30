@@ -12,15 +12,15 @@ public class S_TallPlant : SeasonalObject {
 		baseYScale = transform.localScale.y;
 	}
 
-	public override void Transition(Season toSeason) {
-		if (currentSeason != toSeason) {
-			if (toSeason != Season.Spring) {
-				GetComponent<Collider2D>().isTrigger = true;
-			}
+	protected override void DoTransition(Season toSeason) {
+		if (toSeason != Season.Spring) {
+			GetComponent<Collider2D>().isTrigger = true;
+			gameObject.layer = 10;
+		}
 
-			if (toSeason == Season.Spring) {
-				GetComponent<Collider2D>().isTrigger = false;
-			}
+		if (toSeason == Season.Spring) {
+			GetComponent<Collider2D>().isTrigger = false;
+			gameObject.layer = 0;
 		}
 	}
 }
