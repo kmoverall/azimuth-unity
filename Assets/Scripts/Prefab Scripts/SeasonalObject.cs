@@ -8,6 +8,7 @@ public abstract class SeasonalObject : MonoBehaviour {
 	protected void Start() {
 		Transition(GameManager.GlobalSeason);
 		currentSeason = GameManager.GlobalSeason;
+		Initialize();
 	}
 
 	//Boilerplate to make sure that the object-specific transitions only happen when needed
@@ -20,4 +21,6 @@ public abstract class SeasonalObject : MonoBehaviour {
 	}
 
 	protected abstract void DoTransition(Season toSeason);
+
+	protected abstract void Initialize();
 }

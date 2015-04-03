@@ -44,12 +44,11 @@ Functions that behave as event resoibse are to begin with On, followed by a desc
 
 Member variables are camelCased, prefixed with a letter to indicate intended nature of variable
 Key:
-cVarName		A component of the prefab this script is attached to. Use [RequireComponent (typeof (classname))] on class
-oVarName		A GameObject external to the one this script is attached to
-eVarName		A component of a GameObject external to the one this script is attached to
-kVarName		A constant value
-DEPRECATED:		gVarName		One of the "global" GameObjects stored in the scene, as dictated by the Prefabs section of this document
-								No longer in use, as all global gameobjects should be singletons using static functions to access data
+c_VarName		A component of the prefab this script is attached to. Use [RequireComponent (typeof (classname))] on class
+o_VarName		A GameObject external to the one this script is attached to
+e_VarName		A component of a GameObject external to the one this script is attached to
+k_VarName		A constant value
+h_VarName		A child object or component of a child object in this prefab
 varName			No prefix is intrinsic properties of the script
 varName			Variables exposed in the inspector have no prefix, regardless of other conditions
 

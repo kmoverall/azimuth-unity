@@ -9,8 +9,8 @@ public class SeasonEmitter : MonoBehaviour {
 	[HideInInspector] bool isActive = true;
 	public bool IsActive { get {return isActive; } }
 	public float radius;
-	const float kMaxDepth = -1;
-	const float kMinDepth = 1;
+	const float k_MaxDepth = -1;
+	const float k_MinDepth = 1;
 
 	//Node index is used to assign the correct shader values
 	int nodeIndex;
