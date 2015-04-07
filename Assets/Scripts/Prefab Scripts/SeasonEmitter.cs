@@ -6,7 +6,7 @@ public class SeasonEmitter : MonoBehaviour {
 	int numEffectedSeasonalObjects = 0;
 
 	//TODO: Create a custom inspector for season emitters
-	[HideInInspector] bool isActive = true;
+	bool isActive = true;
 	public bool IsActive { get {return isActive; } }
 	public float radius;
 	const float k_MaxDepth = -1;
