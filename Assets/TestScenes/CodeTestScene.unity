@@ -187,8 +187,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 969301571}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.54, y: 2.07999992, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -15.2749996, y: -3.32809997, z: 0}
+  m_LocalScale: {x: .899999917, y: 2.04999948, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -419,8 +419,9 @@ GameObject:
   - 212: {fileID: 1432444024}
   - 61: {fileID: 1432444027}
   - 114: {fileID: 1432444026}
+  - 95: {fileID: 1432444028}
   m_Layer: 10
-  m_Name: New Sprite
+  m_Name: S_TallPlant_Grown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -459,10 +460,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1432444023}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.6500001, y: -.180000007, z: 0}
-  m_LocalScale: {x: 2.5, y: 14, z: 1}
+  m_LocalPosition: {x: -5.6500001, y: -.300000012, z: 0}
+  m_LocalScale: {x: 2.5541625, y: 14, z: 1}
   m_Children:
   - {fileID: 1768182109}
+  - {fileID: 1947690691}
   m_Father: {fileID: 0}
   m_RootOrder: 7
 --- !u!114 &1432444026
@@ -476,22 +478,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b426883358cb7499d5e6a4248e0023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  growthCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: .00115164742
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1.01060617
-      value: 1.00530481
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  plantBlock: {fileID: 1768182111}
 --- !u!61 &1432444027
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -505,6 +491,23 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: .319999993, y: .319999993}
+--- !u!95 &1432444028
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1432444023}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 686f13831b8e9724089deaa319bdb793, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1001 &1433246946
 Prefab:
   m_ObjectHideFlags: 0
@@ -546,7 +549,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 0c08b6ed41ce746b9a3df98bb2977c0f, type: 2}
       propertyPath: movement.movementStyle
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 21200000, guid: 0c08b6ed41ce746b9a3df98bb2977c0f, type: 2}
       propertyPath: m_SortingOrder
@@ -568,6 +571,14 @@ Prefab:
       propertyPath: jump.jumpVelocity
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 0c08b6ed41ce746b9a3df98bb2977c0f, type: 2}
+      propertyPath: slopes.allowSlopes
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6100000, guid: 0c08b6ed41ce746b9a3df98bb2977c0f, type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0c08b6ed41ce746b9a3df98bb2977c0f, type: 2}
   m_IsPrefabParent: 0
@@ -582,7 +593,7 @@ GameObject:
   - 212: {fileID: 1768182110}
   - 61: {fileID: 1768182111}
   m_Layer: 0
-  m_Name: New Sprite 1
+  m_Name: PlantBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -623,7 +634,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: c773506aedca04b52b9a214525b5a9b3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!61 &1768182111
@@ -706,6 +717,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+--- !u!1 &1947690690
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1947690691}
+  - 61: {fileID: 1947690693}
+  - 114: {fileID: 1947690692}
+  m_Layer: 0
+  m_Name: PlantPlatform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1947690691
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1947690690}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: .128800005, z: 0}
+  m_LocalScale: {x: .319999993, y: .0660812482, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1432444025}
+  m_RootOrder: 1
+--- !u!114 &1947690692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1947690690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db967a00903ae1048891e3cd8a5b337b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &1947690693
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1947690690}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
 --- !u!1 &2083058259
 GameObject:
   m_ObjectHideFlags: 0

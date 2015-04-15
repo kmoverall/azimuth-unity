@@ -4,10 +4,10 @@ Shader "Sprites/SeasonalSprite"
 	{
 	//Main texture is used purely by the sprite renderer, and is not used by for actual renderering
 		[PerRendererData] _MainTex ("Main Sprite Texture", 2D) = "white" {}
-		_SprTex ("Spring Sprite Texture", 2D) = "white" {}
-		_SumTex ("Summer Sprite Texture", 2D) = "white" {}
-		_AutTex ("Autumn Sprite Texture", 2D) = "white" {}
-		_WinTex ("Winter Sprite Texture", 2D) = "white" {}
+		[PerRendererData] _SprTex ("Spring Sprite Texture", 2D) = "white" {}
+		[PerRendererData] _SumTex ("Summer Sprite Texture", 2D) = "white" {}
+		[PerRendererData] _AutTex ("Autumn Sprite Texture", 2D) = "white" {}
+		[PerRendererData] _WinTex ("Winter Sprite Texture", 2D) = "white" {}
 		_Color ("Tint", Color) = (1,1,1,1)
 		[MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
 	}

@@ -14,6 +14,9 @@ Assets/Plugins/Ferr/2DTerrain/NewTerrainMaterial.prefab
 Assets/Prefabs/Experimental/PlatformRamp.prefab
 Assets/Prefabs/Experimental/CharacterRobotBoy 1.prefab
 Assets/Standard Assets/2D/Prefabs/CharacterRobotBoy.prefab
+Assets/Prefabs/Experimental/AlienCharacter.prefab
+Assets/Prefabs/Experimental/S_TallPlant_Grown.prefab
+Assets/Prefabs/Experimental/Season Node.prefab
 
 [Ferr2DT_PathTerrain]
 Assets/Prefabs/Experimental/PlatformRamp.prefab
@@ -30,19 +33,6 @@ Assets/Plugins/Ferr/2DTerrain/NewTerrainMaterial.prefab
 Assets/Plugins/Ferr/2DTerrain/Examples/Assets/FerrlibLogoSmall.prefab
 Assets/Plugins/Ferr/2DTerrain/Examples/Assets/Tumbleweed.prefab
 Assets/Plugins/Ferr/2DTerrain/TerrainMaterials/SandTerrainMaterial.prefab
-Assets/Plugins/2DPlatformController/Prefabs/RopeFlexi.prefab
-Assets/Plugins/2DPlatformController/Prefabs/Vine.prefab
-Assets/Plugins/2DPlatformController/Samples/SupportingAssets/Projectile/Projectile.prefab
-Assets/Plugins/2DPlatformController/Prefabs/LadderMesh.prefab
-Assets/Plugins/2DPlatformController/Prefabs/RopeStiff.prefab
-Assets/Plugins/2DPlatformController/2DVersion/Prefabs/HeroCharacter2D.prefab
-Assets/Plugins/2DPlatformController/Prefabs/HeroCharacterWithCrouch.prefab
-Assets/Plugins/2DPlatformController/Samples/SupportingAssets/GUIText.prefab
-Assets/Plugins/2DPlatformController/Samples/SupportingAssets/MarioSample/Coin.prefab
-Assets/Plugins/2DPlatformController/Prefabs/HeroCharacter.prefab
-Assets/Plugins/2DPlatformController/Samples/SupportingAssets/Projectile/Shooter.prefab
-Assets/Plugins/2DPlatformController/Prefabs/HeroCharacterWithDamage.prefab
-Assets/Plugins/2DPlatformController/2DVersion/Prefabs/AlienCharacter.prefab
-Assets/Plugins/2DPlatformController/Prefabs/BasicCharacter.prefab
-Assets/Plugins/2DPlatformController/Prefabs/TouchController.prefab
-Assets/Plugins/2DPlatformController/Samples/SupportingAssets/MarioSample/EnemyBounceAndFall.prefab
+Assets/Prefabs/Experimental/AlienCharacter.prefab
+Assets/Prefabs/Experimental/S_TallPlant_Grown.prefab
+Assets/Prefabs/Experimental/Season Node.prefab

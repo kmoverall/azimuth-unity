@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(BoxCollider2D))]
-public class S_TallPlant : SeasonalObject {
+[RequireComponent(typeof(Animator))]
+//The standard season object animates when the seasons change.
+//Though this sounds simple, Mecanim allows for a lot of variety with just this
+public class S_StandardSeasonObject : SeasonalObject {
 	Animator animator;
 
 	new protected void Start() {
@@ -11,13 +13,10 @@ public class S_TallPlant : SeasonalObject {
 	}
 
 	protected override void DoTransition(Season toSeason) {
-		Debug.Log((int)toSeason);
 		animator.SetInteger("SeasonChange", (int)toSeason);
-		animator.SetTrigger("SeasonTrigger");
 	}
 
 	protected override void Initialize() {
 		animator.SetInteger("SeasonChange", (int)currentSeason);
-		animator.SetTrigger("SeasonTrigger");
 	}
 }
