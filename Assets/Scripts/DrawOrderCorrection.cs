@@ -4,7 +4,7 @@ using System.Collections;
 //This script needs to be attached to every SpriteRenderer in the scene, to ensure proper draw order
 [ExecuteInEditMode]
 [RequireComponent(typeof(SpriteRenderer))]
-public class SpriteCorrection : MonoBehaviour {
+public class DrawOrderCorrection : MonoBehaviour {
 	SpriteRenderer render;
 	void Start() {
 		render = gameObject.GetComponent<SpriteRenderer>();

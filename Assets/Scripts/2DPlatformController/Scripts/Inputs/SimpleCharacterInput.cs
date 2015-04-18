@@ -22,10 +22,6 @@ public class SimpleCharacterInput : RaycastCharacterInput
 	[HideInInspector]
 	public bool nodeKeyPressed = false;
 
-	void Awake() {
-
-	}
-
 	protected void Update ()
 	{
 		
@@ -84,6 +80,19 @@ public class SimpleCharacterInput : RaycastCharacterInput
 		} else {
 			jumpButtonDown = false;
 			swimButtonDown = false;
+		}
+
+		if (Input.GetKeyDown(KeyCode.Alpha1)) {
+			GameManager.ChangeNodeSeason(Season.Spring);
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha2)) {
+			GameManager.ChangeNodeSeason(Season.Summer);
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha3)) {
+			GameManager.ChangeNodeSeason(Season.Fall);
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha4)) {
+			GameManager.ChangeNodeSeason(Season.Winter);
 		}
 	}
 	

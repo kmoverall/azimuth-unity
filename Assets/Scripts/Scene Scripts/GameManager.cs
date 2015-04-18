@@ -99,6 +99,11 @@ public class GameManager : MonoBehaviour {
 		return instance.globalSeason;
 	}
 
+	public static void ChangeNodeSeason(Season toSeason) {
+		if (instance.globalSeason != toSeason)
+			instance.nodeSeason = toSeason;
+	}
+
 	#endregion
 
 	GameState currentGameState = GameState.Playing;
