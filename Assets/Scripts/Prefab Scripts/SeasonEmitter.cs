@@ -50,7 +50,7 @@ public class SeasonEmitter : MonoBehaviour {
 			Shader.SetGlobalInt("_NODE" + nodeIndex + "_ACTIVE", 0);
 		}
 
-		//Tells seaonsal objects to transition if needed
+		//Tells seasonal objects to transition if needed
 
 		numEffectedSeasonalObjects = Physics2D.OverlapCircleNonAlloc(transform.position, radius, eEffectedSeasonalObjects);
 

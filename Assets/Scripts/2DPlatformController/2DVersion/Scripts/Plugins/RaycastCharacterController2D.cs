@@ -86,7 +86,7 @@ public class RaycastCharacterController2D : MonoBehaviour {
 	/// <summary>
 	/// The character input that controls this character.
 	/// </summary>
-	public RaycastCharacterInput characterInput;
+	public SimpleCharacterInput characterInput;
 	/// <summary>
 	/// Assign a direction checker if you want to do one of two things.
 	/// 1) Determine the way the character is facing using a mechanism
@@ -102,6 +102,9 @@ public class RaycastCharacterController2D : MonoBehaviour {
 	/// WARNING: If this is too large your character can fall through the ground, or move through small platforms.
 	/// </summary>
 	public static float maxFrameTime = 0.033f;
+
+	// The distance frmom the character that a node has to be to be picked up
+	public float nodePickupRange = 0.5f;
 	
 	
 	#region private members
@@ -159,7 +162,9 @@ public class RaycastCharacterController2D : MonoBehaviour {
 	private string currentWallTag = null;
 	
 	public float targetSlope;
-	
+
+	private SeasonEmitter eHeldNode = null;
+
 	#endregion
 	
 	#region events
@@ -477,6 +482,16 @@ public class RaycastCharacterController2D : MonoBehaviour {
 				}
 				if (directionChecker != null ) directionChecker.UpdateDirection(this);
 			}
+
+			if (characterInput.nodeKeyPressed) {
+				if (eHeldNode == null) {
+					PickupNode();
+				}
+				else {
+					DropNode();
+				}
+			}
+
 			UpdateAnimation();
 		}
 	}
@@ -501,26 +516,50 @@ public class RaycastCharacterController2D : MonoBehaviour {
 		if (feetColliders != null) {
 			foreach (RaycastCollider2D c in feetColliders) {
 				if (c.transform == null) c.transform =  transform ;
-				c.DrawRayCast();	
+				c.DrawRayCast();
 			}
 		}
 		if (headColliders != null) {
 			foreach (RaycastCollider2D c in headColliders) {
 				if (c.transform == null) c.transform = transform;
-				c.DrawRayCast();	
+				c.DrawRayCast();
 			}
 		}
 		if (sides != null) {
 			foreach (RaycastCollider2D c in sides) {
 				if (c.transform == null) c.transform = transform;
-				c.DrawRayCast();	
+				c.DrawRayCast();
 			}
 		}	
 	}
 	
 	
 	#endregion
-	
+
+	protected void PickupNode() {
+		SeasonEmitter nodeToPickUp = GameManager.GetNearestNode(gameObject.transform.position);
+
+		//If the node is within pickup range, parent it to the player character and disable it
+		if (Vector3.Distance(nodeToPickUp.transform.position, gameObject.transform.position) < nodePickupRange) {
+			nodeToPickUp.gameObject.transform.parent = gameObject.transform;
+			nodeToPickUp.Deactivate();
+			eHeldNode = nodeToPickUp;
+			eHeldNode.gameObject.transform.localPosition = Vector3.zero;
+		}
+	}
+
+	protected void DropNode() {
+		if (IsGrounded(groundedLookAhead, false)) {
+			//Checks for colliders beneath the player in the "No Node Drop" Layer, which prevent placing nodes
+			int layermask = 1 << 11;
+			if (Physics2D.Raycast(gameObject.transform.position, Vector3.down, 5.0f, layermask, -1.0f, 1.0f).collider == null) {
+				eHeldNode.transform.parent = null;
+				eHeldNode.Activate();
+				eHeldNode = null;
+			}
+		}
+	}
+
 	protected void MoveInXDirection (bool grounded)
 	{
 		// Create a copy of character input which we can modify;
