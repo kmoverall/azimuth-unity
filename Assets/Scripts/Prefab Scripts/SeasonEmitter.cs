@@ -5,7 +5,6 @@ public class SeasonEmitter : MonoBehaviour {
 	Collider2D[] eEffectedSeasonalObjects = new Collider2D[30];
 	int numEffectedSeasonalObjects = 0;
 
-	//TODO: Create a custom inspector for season emitters
 	bool isActive = true;
 	public bool IsActive { get {return isActive; } }
 	public float radius;

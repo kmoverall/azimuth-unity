@@ -492,6 +492,11 @@ public class RaycastCharacterController2D : MonoBehaviour {
 				}
 			}
 
+			//Corrects scaling errors due to moving platforms
+			if (gameObject.transform.parent == null) {
+				gameObject.transform.localScale = Vector3.one;
+			}
+
 			UpdateAnimation();
 		}
 	}
@@ -552,7 +557,7 @@ public class RaycastCharacterController2D : MonoBehaviour {
 		if (IsGrounded(groundedLookAhead, false)) {
 			//Checks for colliders beneath the player in the "No Node Drop" Layer, which prevent placing nodes
 			int layermask = 1 << 11;
-			if (Physics2D.Raycast(gameObject.transform.position, Vector3.down, 5.0f, layermask, -1.0f, 1.0f).collider == null) {
+			if (Physics2D.Raycast(gameObject.transform.position, Vector3.down, 1.0f, layermask, -1.0f, 1.0f).collider == null) {
 				eHeldNode.transform.parent = null;
 				eHeldNode.Activate();
 				eHeldNode = null;

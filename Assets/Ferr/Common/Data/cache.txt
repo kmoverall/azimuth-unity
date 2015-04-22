@@ -15,8 +15,9 @@ Assets/Prefabs/Experimental/PlatformRamp.prefab
 Assets/Prefabs/Experimental/CharacterRobotBoy 1.prefab
 Assets/Standard Assets/2D/Prefabs/CharacterRobotBoy.prefab
 Assets/Prefabs/Experimental/AlienCharacter.prefab
-Assets/Prefabs/Experimental/S_TallPlant_Grown.prefab
 Assets/Prefabs/Experimental/Season Node.prefab
+Assets/Prefabs/Experimental/S_TallPlant.prefab
+Assets/Prefabs/Experimental/S_WidePlant.prefab
 
 [Ferr2DT_PathTerrain]
 Assets/Prefabs/Experimental/PlatformRamp.prefab
@@ -34,5 +35,6 @@ Assets/Plugins/Ferr/2DTerrain/Examples/Assets/FerrlibLogoSmall.prefab
 Assets/Plugins/Ferr/2DTerrain/Examples/Assets/Tumbleweed.prefab
 Assets/Plugins/Ferr/2DTerrain/TerrainMaterials/SandTerrainMaterial.prefab
 Assets/Prefabs/Experimental/AlienCharacter.prefab
-Assets/Prefabs/Experimental/S_TallPlant_Grown.prefab
 Assets/Prefabs/Experimental/Season Node.prefab
+Assets/Prefabs/Experimental/S_TallPlant.prefab
+Assets/Prefabs/Experimental/S_WidePlant.prefab
