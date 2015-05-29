@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[ExecuteInEditMode]
 public abstract class SeasonalObject : MonoBehaviour {
 	protected Season currentSeason;
 
@@ -19,6 +20,8 @@ public abstract class SeasonalObject : MonoBehaviour {
 			currentSeason = toSeason;
 		}
 	}
+
+	public abstract void ReactToNode(SeasonEmitter node);
 
 	protected abstract void DoTransition(Season toSeason);
 

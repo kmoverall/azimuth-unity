@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[System.Serializable]
 [ExecuteInEditMode]
 [RequireComponent(typeof(SpriteRenderer))]
 public class SeasonalSpriteRenderer : MonoBehaviour {

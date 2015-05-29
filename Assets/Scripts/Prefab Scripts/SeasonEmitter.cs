@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[ExecuteInEditMode]
 public class SeasonEmitter : MonoBehaviour {
 	Collider2D[] eEffectedSeasonalObjects = new Collider2D[30];
 	int numEffectedSeasonalObjects = 0;
@@ -59,7 +60,8 @@ public class SeasonEmitter : MonoBehaviour {
 
 		for (int i = 0; i < numEffectedSeasonalObjects; i++) {
 			if (eEffectedSeasonalObjects[i].gameObject.GetComponent<SeasonalObject>() != null && isActive) {
-					eEffectedSeasonalObjects[i].gameObject.GetComponent<SeasonalObject>().Transition(GameManager.NodeSeason);
+				eEffectedSeasonalObjects[i].gameObject.GetComponent<SeasonalObject>().Transition(GameManager.NodeSeason);
+				eEffectedSeasonalObjects[i].gameObject.GetComponent<SeasonalObject>().ReactToNode(this);
 			}
 		}
 	}

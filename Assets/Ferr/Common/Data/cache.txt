@@ -18,6 +18,7 @@ Assets/Prefabs/Experimental/AlienCharacter.prefab
 Assets/Prefabs/Experimental/Season Node.prefab
 Assets/Prefabs/Experimental/S_TallPlant.prefab
 Assets/Prefabs/Experimental/S_WidePlant.prefab
+Assets/Prefabs/Experimental/Ice.prefab
 
 [Ferr2DT_PathTerrain]
 Assets/Prefabs/Experimental/PlatformRamp.prefab
@@ -38,3 +39,4 @@ Assets/Prefabs/Experimental/AlienCharacter.prefab
 Assets/Prefabs/Experimental/Season Node.prefab
 Assets/Prefabs/Experimental/S_TallPlant.prefab
 Assets/Prefabs/Experimental/S_WidePlant.prefab
+Assets/Prefabs/Experimental/Ice.prefab

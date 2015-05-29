@@ -12,6 +12,8 @@ public class S_StandardSeasonObject : SeasonalObject {
 		base.Start();
 	}
 
+	public override void ReactToNode(SeasonEmitter node) { }
+
 	protected override void DoTransition(Season toSeason) {
 		animator.SetInteger("SeasonChange", (int)toSeason);
 	}

@@ -15,9 +15,9 @@ public class SeasonalSpriteEditor : Editor {
 		SeasonalSpriteRenderer targetComponent = (SeasonalSpriteRenderer)target;
 		targetComponent.render = targetComponent.GetComponent<SpriteRenderer>();
 		
-		targetComponent.render.sharedMaterial = Resources.Load<Material>("SeasonSprite");
-		targetComponent.render.sharedMaterial.hideFlags = HideFlags.HideInInspector;
-		targetComponent.render.hideFlags = HideFlags.HideInInspector;
+		//targetComponent.render.sharedMaterial = Resources.Load<Material>("SeasonSprite");
+		//targetComponent.render.sharedMaterial.hideFlags = HideFlags.HideInInspector;
+		//targetComponent.render.hideFlags = HideFlags.HideInInspector;
 
 		maskSprite = serializedObject.FindProperty("maskSprite");
 		springSprite = serializedObject.FindProperty("springSprite");
@@ -33,7 +33,7 @@ public class SeasonalSpriteEditor : Editor {
 
 	public override void OnInspectorGUI() {
 		SeasonalSpriteRenderer targetComponent = (SeasonalSpriteRenderer)target;
-		
+
 		EditorGUILayout.PropertyField(maskSprite, new GUIContent("Sprite Mask"));
 		EditorGUILayout.PropertyField(springSprite, new GUIContent("Spring Texture"));
 		EditorGUILayout.PropertyField(summerSprite, new GUIContent("Summer Texture"));
@@ -41,7 +41,7 @@ public class SeasonalSpriteEditor : Editor {
 		EditorGUILayout.PropertyField(winterSprite, new GUIContent("Winter Texture"));
 
 		targetComponent.render.sprite = targetComponent.maskSprite;
-		targetComponent.UpdatePropertyBlock();
+		//targetComponent.UpdatePropertyBlock();
 
 		serializedObject.ApplyModifiedProperties();
 
