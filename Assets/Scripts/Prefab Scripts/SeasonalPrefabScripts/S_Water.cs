@@ -9,17 +9,19 @@ public class S_Water : SeasonalObject {
 	private BoxCollider2D collider;
 
 	public BoxCollider2D icePrefab;
+    public List<Bounds> iceBoxes;
 
 	// Use this for initialization
 	protected override void Initialize () {
 		collider = gameObject.GetComponent<BoxCollider2D>();
+        iceBoxes = new List<Bounds>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		foreach (SeasonEmitter node in o_IntersectingNodes) {
-			
-		}
+		for(int i = 0; i < o_IntersectingNodes.Count; i++) {
+
+        }
 	}
 
 	public override void ReactToNode(SeasonEmitter node) {
