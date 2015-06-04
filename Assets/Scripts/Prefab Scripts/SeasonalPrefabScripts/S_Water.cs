@@ -29,6 +29,7 @@ public class S_Water : SeasonalObject {
 	// Update is called once per frame
 	void Update () {
 		for(int i = 0; i < o_IntersectingNodes.Count; i++) {
+			//Determine Maximum X value
 
         }
 	}
