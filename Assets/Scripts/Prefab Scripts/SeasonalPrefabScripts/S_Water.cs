@@ -5,6 +5,15 @@ using System.Collections.Generic;
 [RequireComponent(typeof(BoxCollider2D))]
 public class S_Water : SeasonalObject {
 
+	[System.Flags]
+	public enum RelativeLocation {
+		Inside = 0,
+		Right = 1,
+		Left = 2,
+		Above = 4,
+		Below = 8
+	}
+
 	private List<SeasonEmitter> o_IntersectingNodes;
 	private BoxCollider2D collider;
 
