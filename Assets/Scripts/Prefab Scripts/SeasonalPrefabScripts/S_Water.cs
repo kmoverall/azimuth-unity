@@ -20,7 +20,7 @@ public class S_Water : SeasonalObject {
 	// Update is called once per frame
 	void Update () {
 		for(int i = 0; i < o_IntersectingNodes.Count; i++) {
-			//Determine Maximum X value
+			
 
         }
 	}
@@ -37,6 +37,9 @@ public class S_Water : SeasonalObject {
         List<Vector3> candidatePoints = new List<Vector3>();
         List<Vector3> intersects;
         List<Vector3> selectedPoints = new List<Vector3>();
+
+		Vector3 resultMin;
+		Vector3 resultMax;
 
         //Add corners of collider
         corners.Add(new Vector3(collider.bounds.max.x, collider.bounds.max.y, 0));
@@ -74,10 +77,43 @@ public class S_Water : SeasonalObject {
             candidatePoints.Add(p);
         }
 
+		//Adds non-corner points that are within the bounds of the water
+		foreach (Vector3 p in candidatePoints) {
+			if (collider.OverlapPoint(p)) {
+				selectedPoints.Add(p);
+			}
+		}
+		//Adds corner points that are within the node
+		foreach (Vector3 corner in corners) {
+			if (Vector3.Distance(corner, node.transform.position) <= node.radius) {
+				selectedPoints.Add(corner);
+			}
+		}
 
+		//Find the bounding rectangle of the selectedPoints
+		resultMax = selectedPoints[0];
+		resultMin = selectedPoints[0];
+		for (int i = 1; i < selectedPoints.Count; i++) {
+			//Set Minimum
+			if (selectedPoints[i].x < resultMin.x) {
+				resultMin.x = selectedPoints[i].x;
+			}
+			if (selectedPoints[i].y < resultMin.y) {
+				resultMin.y = selectedPoints[i].y;
+			}
 
+			//Set Maximum
+			if (selectedPoints[i].x > resultMax.x) {
+				resultMax.x = selectedPoints[i].x;
+			}
+			if (selectedPoints[i].y > resultMax.y) {
+				resultMax.y = selectedPoints[i].y;
+			}
+		}
 
-        return results;
+		results.SetMinMax(resultMin, resultMax);
+
+		return results;
     }
 
 	private List<Vector3> FindCircleLineIntersect(Vector3 center, float radius, float maxX, float minX, float maxY, float minY) {
