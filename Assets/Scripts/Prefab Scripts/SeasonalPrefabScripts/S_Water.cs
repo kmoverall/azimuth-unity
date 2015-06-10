@@ -6,27 +6,39 @@ using System.Collections.Generic;
 public class S_Water : SeasonalObject {
 
 	private List<SeasonEmitter> o_IntersectingNodes;
-	private BoxCollider2D collider;
+	private BoxCollider2D waterCollider;
 
+    //Ice prefab must only be a BoxCollider2D with a scale of 1x1 units
 	public BoxCollider2D icePrefab;
-    public List<Bounds> iceBoxes;
+    private List<BoxCollider2D> iceBoxes;
 
 	// Use this for initialization
 	protected override void Initialize () {
-		collider = gameObject.GetComponent<BoxCollider2D>();
-        iceBoxes = new List<Bounds>();
+        waterCollider = gameObject.GetComponent<BoxCollider2D>();
+        iceBoxes = new List<BoxCollider2D>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        Bounds tmpBounds = new Bounds();
 		for(int i = 0; i < o_IntersectingNodes.Count; i++) {
-			
-
+            tmpBounds = FindIntersectionBounds(o_IntersectingNodes[i]);
+            //Check if the intersection actually exists
+            if (tmpBounds.min != Vector3.zero && tmpBounds.max != Vector3.zero) {
+                iceBoxes[i].transform.position = new Vector3((tmpBounds.max.x + tmpBounds.min.x) / 2, (tmpBounds.max.y + tmpBounds.min.y) / 2, 0);
+                iceBoxes[i].transform.localScale = new Vector3(tmpBounds.max.x - tmpBounds.min.x, tmpBounds.max.y - tmpBounds.min.y, 1);
+            } else {
+                o_IntersectingNodes.RemoveAt(i);
+                iceBoxes.RemoveAt(i);
+                //Ensure that index remains at the appropriate amount
+                i--;
+            }
         }
 	}
 
 	public override void ReactToNode(SeasonEmitter node) {
 		o_IntersectingNodes.Add(node);
+        iceBoxes.Add(Instantiate<BoxCollider2D>(icePrefab));
 	}
 
 	protected override void DoTransition(Season toSeason) {}
@@ -42,10 +54,10 @@ public class S_Water : SeasonalObject {
 		Vector3 resultMax;
 
         //Add corners of collider
-        corners.Add(new Vector3(collider.bounds.max.x, collider.bounds.max.y, 0));
-        corners.Add(new Vector3(collider.bounds.max.x, collider.bounds.min.y, 0));
-        corners.Add(new Vector3(collider.bounds.min.x, collider.bounds.max.y, 0));
-        corners.Add(new Vector3(collider.bounds.min.x, collider.bounds.min.y, 0));
+        corners.Add(new Vector3(waterCollider.bounds.max.x, waterCollider.bounds.max.y, 0));
+        corners.Add(new Vector3(waterCollider.bounds.max.x, waterCollider.bounds.min.y, 0));
+        corners.Add(new Vector3(waterCollider.bounds.min.x, waterCollider.bounds.max.y, 0));
+        corners.Add(new Vector3(waterCollider.bounds.min.x, waterCollider.bounds.min.y, 0));
 
         //Add quadrants of node
         candidatePoints.Add(new Vector3(node.transform.position.x, node.transform.position.y + node.radius, 0));
@@ -54,32 +66,32 @@ public class S_Water : SeasonalObject {
         candidatePoints.Add(new Vector3(node.transform.position.x - node.radius, node.transform.position.y, 0));
 
         //Add intersects with top of collider
-        intersects = FindCircleLineIntersect(node.transform.position, node.radius, collider.bounds.max.x, collider.bounds.min.x, collider.bounds.max.y, collider.bounds.max.y);
+        intersects = FindCircleLineIntersect(node.transform.position, node.radius, waterCollider.bounds.max.x, waterCollider.bounds.min.x, waterCollider.bounds.max.y, waterCollider.bounds.max.y);
         foreach (Vector3 p in intersects) {
             candidatePoints.Add(p);
         }
 
         //Add intersects with bottom of collider
-        intersects = FindCircleLineIntersect(node.transform.position, node.radius, collider.bounds.max.x, collider.bounds.min.x, collider.bounds.min.y, collider.bounds.min.y);
+        intersects = FindCircleLineIntersect(node.transform.position, node.radius, waterCollider.bounds.max.x, waterCollider.bounds.min.x, waterCollider.bounds.min.y, waterCollider.bounds.min.y);
         foreach (Vector3 p in intersects) {
             candidatePoints.Add(p);
         }
 
         //Add intersects with left side of collider
-        intersects = FindCircleLineIntersect(node.transform.position, node.radius, collider.bounds.min.x, collider.bounds.min.x, collider.bounds.max.y, collider.bounds.min.y);
+        intersects = FindCircleLineIntersect(node.transform.position, node.radius, waterCollider.bounds.min.x, waterCollider.bounds.min.x, waterCollider.bounds.max.y, waterCollider.bounds.min.y);
         foreach (Vector3 p in intersects) {
             candidatePoints.Add(p);
         }
 
         //Add intersects with right side of collider
-        intersects = FindCircleLineIntersect(node.transform.position, node.radius, collider.bounds.max.x, collider.bounds.max.x, collider.bounds.max.y, collider.bounds.min.y);
+        intersects = FindCircleLineIntersect(node.transform.position, node.radius, waterCollider.bounds.max.x, waterCollider.bounds.max.x, waterCollider.bounds.max.y, waterCollider.bounds.min.y);
         foreach (Vector3 p in intersects) {
             candidatePoints.Add(p);
         }
 
 		//Adds non-corner points that are within the bounds of the water
 		foreach (Vector3 p in candidatePoints) {
-			if (collider.OverlapPoint(p)) {
+			if (waterCollider.OverlapPoint(p)) {
 				selectedPoints.Add(p);
 			}
 		}
@@ -111,8 +123,14 @@ public class S_Water : SeasonalObject {
 			}
 		}
 
-		results.SetMinMax(resultMin, resultMax);
+        if (resultMin != resultMax) {
+            results.SetMinMax(resultMin, resultMax);
+        }
+        else {
+            results.SetMinMax(Vector3.zero, Vector3.zero);
+        }
 
+        
 		return results;
     }
 
