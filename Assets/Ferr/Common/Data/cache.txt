@@ -75,6 +75,7 @@ Assets/Prefabs/Experimental/Season Node.prefab
 Assets/Plugins/Ferr/2DTerrain/TerrainMaterials/SandTerrainMaterial.prefab
 Assets/Standard Assets/Prototyping/Prefabs/RampPrototype04x02x02.prefab
 Assets/Scripts/2DPlatformController/Samples/SupportingAssets/MarioSample/EnemyBounceAndFall.prefab
+Assets/Prefabs/Experimental/Ice.prefab
 
 [Ferr2DT_PathTerrain]
 Assets/Scripts/2DPlatformController/Prefabs/RopeFlexi.prefab
@@ -152,3 +153,4 @@ Assets/Prefabs/Experimental/Season Node.prefab
 Assets/Plugins/Ferr/2DTerrain/TerrainMaterials/SandTerrainMaterial.prefab
 Assets/Standard Assets/Prototyping/Prefabs/RampPrototype04x02x02.prefab
 Assets/Scripts/2DPlatformController/Samples/SupportingAssets/MarioSample/EnemyBounceAndFall.prefab
+Assets/Prefabs/Experimental/Ice.prefab

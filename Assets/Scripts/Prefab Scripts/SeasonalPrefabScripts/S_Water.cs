@@ -4,42 +4,33 @@ using System.Collections.Generic;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class S_Water : SeasonalObject {
-
-	private List<SeasonEmitter> o_IntersectingNodes;
+    
 	private BoxCollider2D waterCollider;
 
     //Ice prefab must only be a BoxCollider2D with a scale of 1x1 units
 	public BoxCollider2D icePrefab;
-    private List<BoxCollider2D> iceBoxes;
+    private Dictionary<SeasonEmitter, BoxCollider2D> iceBlocks = new Dictionary<SeasonEmitter, BoxCollider2D>();
 
 	// Use this for initialization
 	protected override void Initialize () {
         waterCollider = gameObject.GetComponent<BoxCollider2D>();
-        iceBoxes = new List<BoxCollider2D>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        Bounds tmpBounds = new Bounds();
-		for(int i = 0; i < o_IntersectingNodes.Count; i++) {
-            tmpBounds = FindIntersectionBounds(o_IntersectingNodes[i]);
-            //Check if the intersection actually exists
-            if (tmpBounds.min != Vector3.zero && tmpBounds.max != Vector3.zero) {
-                iceBoxes[i].transform.position = new Vector3((tmpBounds.max.x + tmpBounds.min.x) / 2, (tmpBounds.max.y + tmpBounds.min.y) / 2, 0);
-                iceBoxes[i].transform.localScale = new Vector3(tmpBounds.max.x - tmpBounds.min.x, tmpBounds.max.y - tmpBounds.min.y, 1);
-            } else {
-                o_IntersectingNodes.RemoveAt(i);
-                iceBoxes.RemoveAt(i);
-                //Ensure that index remains at the appropriate amount
-                i--;
-            }
-        }
+       
 	}
 
 	public override void ReactToNode(SeasonEmitter node) {
-		o_IntersectingNodes.Add(node);
-        iceBoxes.Add(Instantiate<BoxCollider2D>(icePrefab));
-	}
+        if (!iceBlocks.ContainsKey(node)) {
+            iceBlocks.Add(node, Instantiate<BoxCollider2D>(icePrefab));
+        }
+
+        Bounds tmpBounds;
+        tmpBounds = FindIntersectionBounds(node);
+        iceBlocks[node].transform.position = new Vector3((tmpBounds.max.x + tmpBounds.min.x) / 2, (tmpBounds.max.y + tmpBounds.min.y) / 2, 0);
+        iceBlocks[node].transform.localScale = new Vector3(tmpBounds.max.x - tmpBounds.min.x, tmpBounds.max.y - tmpBounds.min.y, 1);
+    }
 
 	protected override void DoTransition(Season toSeason) {}
 

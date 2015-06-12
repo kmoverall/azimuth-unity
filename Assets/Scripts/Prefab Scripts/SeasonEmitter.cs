@@ -12,8 +12,9 @@ public class SeasonEmitter : MonoBehaviour {
 	const float k_MaxDepth = -1;
 	const float k_MinDepth = 1;
 
-	//Node index is used to assign the correct shader values
-	int nodeIndex;
+	//Node index is used to assign the correct shader values    
+    int nodeIndex;
+    public int NodeIndex { get { return nodeIndex;  } }
 
 	public void Activate() {
 		isActive = true;

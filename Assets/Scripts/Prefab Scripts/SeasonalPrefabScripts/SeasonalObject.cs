@@ -21,7 +21,7 @@ public abstract class SeasonalObject : MonoBehaviour {
 		}
 	}
 
-	public abstract void ReactToNode(SeasonEmitter node);
+    public abstract void ReactToNode(SeasonEmitter node);
 
 	protected abstract void DoTransition(Season toSeason);
 
