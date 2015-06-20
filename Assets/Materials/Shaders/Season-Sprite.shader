@@ -31,6 +31,8 @@ Shader "Sprites/SeasonalSprite"
 		Pass
 		{
 		CGPROGRAM
+// Upgrade NOTE: excluded shader from DX11 and Xbox360; has structs without semantics (struct v2f members worldPos)
+#pragma exclude_renderers xbox360
 			#pragma vertex vert
 			#pragma fragment frag
 			#pragma multi_compile _ PIXELSNAP_ON
@@ -49,7 +51,8 @@ Shader "Sprites/SeasonalSprite"
 				fixed4 color    : COLOR;
 				half2 texcoord  : TEXCOORD0;
 				//Fix this to a real output
-				float4 position_in_world_space : WORLD_POSITION;
+				float4 position_in_world_space : TEXCOORD1;
+				//float4 position_in_world_space : WORLD_POSITION;
 			};
 			
 			fixed4 _Color;

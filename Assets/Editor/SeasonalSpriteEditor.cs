@@ -15,9 +15,9 @@ public class SeasonalSpriteEditor : Editor {
 		SeasonalSpriteRenderer targetComponent = (SeasonalSpriteRenderer)target;
 		targetComponent.render = targetComponent.GetComponent<SpriteRenderer>();
 		
-		//targetComponent.render.sharedMaterial = Resources.Load<Material>("SeasonSprite");
-		//targetComponent.render.sharedMaterial.hideFlags = HideFlags.HideInInspector;
-		//targetComponent.render.hideFlags = HideFlags.HideInInspector;
+		targetComponent.render.sharedMaterial = Resources.Load<Material>("SeasonSprite");
+		targetComponent.render.sharedMaterial.hideFlags = HideFlags.HideInInspector;
+		targetComponent.render.hideFlags = HideFlags.HideInInspector;
 
 		maskSprite = serializedObject.FindProperty("maskSprite");
 		springSprite = serializedObject.FindProperty("springSprite");

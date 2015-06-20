@@ -19,7 +19,7 @@ public class SeasonalSpriteRenderer : MonoBehaviour {
 	void Start () {
 		render = GetComponent<SpriteRenderer>();
 		render.sprite = maskSprite;
-		//render.material = Resources.Load<Material>("SeasonSprite");
+		render.material = Resources.Load<Material>("SeasonSprite");
 
 		UpdatePropertyBlock();
 	}
